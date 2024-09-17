@@ -12,7 +12,12 @@ class ItemNote extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: GestureDetector(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NotePage())),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NotePage(note: notes),
+          ),
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: const Color.fromARGB(205, 43, 63, 49),
