@@ -7,6 +7,7 @@ class NotePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.grey[300],
         title: const Center(child: Text('Заметки')),
       ),
       body: const Center(

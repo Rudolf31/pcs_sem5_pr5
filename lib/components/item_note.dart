@@ -10,28 +10,39 @@ class ItemNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(20.0),
       child: GestureDetector(
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NotePage())),
         child: Container(
-          decoration: BoxDecoration(color: const Color.fromARGB(255, 23, 3, 49),
-              borderRadius: BorderRadius.circular(16.0)),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(205, 43, 63, 49),
+            borderRadius: BorderRadius.circular(16.0),
+            border: Border.all(
+              color: Colors.black45,
+              width: 4.0,
+            ),
+          ),
           width: double.infinity,
-          height: MediaQuery
-              .of(context)
-              .size
-              .height * 0.4,
+          constraints: const BoxConstraints(),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Center(child: Text(notes.title,
-                  style: const TextStyle(fontSize: 24, color: Colors.white),)),
+                Center(
+                  child: Text(
+                    notes.title,
+                    style: const TextStyle(fontSize: 34, color: Colors.white),
+                  ),
+                ),
                 Text(
                   notes.description,
-                  style: TextStyle(fontSize: 16, color: Colors.white),),
-                SizedBox(height: 14,),
-                Image(image: AssetImage(notes.photo_id), height: 200,),
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                const SizedBox(height: 14),
+                Image(
+                  image: AssetImage(notes.photo_id),
+                  height: 200,
+                ),
               ],
             ),
           ),

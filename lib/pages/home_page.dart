@@ -72,10 +72,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green[100],
       appBar: AppBar(
-        title:  const Center(child: Text('Приютик кошичих мемов')),
+        backgroundColor: Colors.black87,
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 30,
+        ),
+        title: const Center(child: Text('Приютик кошачих мемов'), ),
       ),
-      body:  ListView.builder(
+      body: ListView.builder(
           itemCount: notes.length,
           itemBuilder: (BuildContext context, int index) {
             return ItemNote(notes: notes[index]);
