@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pcs3_sem5/pages/note_page.dart';
 
-class ItemNote extends StatelessWidget {
-  const ItemNote({super.key, required this.title});
+import '../models/note.dart';
 
-  final String title;
+class ItemNote extends StatelessWidget {
+  const ItemNote({super.key, required this.notes});
+  final Note notes;
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +22,16 @@ class ItemNote extends StatelessWidget {
               .size
               .height * 0.4,
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Center(child: Text(title,
+                Center(child: Text(notes.title,
                   style: const TextStyle(fontSize: 24, color: Colors.white),)),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                  notes.description,
                   style: TextStyle(fontSize: 16, color: Colors.white),),
+                SizedBox(height: 14,),
+                Image(image: AssetImage(notes.photo_id), height: 200,),
               ],
             ),
           ),
