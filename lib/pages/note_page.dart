@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../models/note.dart';
 
 class NotePage extends StatelessWidget {
   final Note note;
+  final Function(int) onDelete; // Добавляем параметр для удаления заметки
 
-  const NotePage({super.key, required this.note});
+  const NotePage({super.key, required this.note, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,7 @@ class NotePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Center(
-              child: Image(
-                image: AssetImage(note.photo_id),
-              ),
+              child: Image.network(note.photo_id),
             ),
             const SizedBox(height: 60),
             Center(
@@ -48,6 +46,7 @@ class NotePage extends StatelessWidget {
                     padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
                   ),
                   onPressed: () {
+                    onDelete(note.id); // Вызываем функцию удаления
                     Navigator.of(context).pop();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

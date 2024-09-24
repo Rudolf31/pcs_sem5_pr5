@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pcs3_sem5/pages/note_page.dart';
-
 import '../models/note.dart';
 
 class ItemNote extends StatelessWidget {
-  const ItemNote({super.key, required this.notes});
+  const ItemNote({super.key, required this.notes, required this.onDelete});
+
   final Note notes;
+  final Function(int) onDelete; // Добавляем параметр для удаления заметки
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,10 @@ class ItemNote extends StatelessWidget {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NotePage(note: notes),
+            builder: (context) => NotePage(
+              note: notes,
+              onDelete: onDelete, // Передаем функцию удаления
+            ),
           ),
         ),
         child: Container(
@@ -44,9 +48,13 @@ class ItemNote extends StatelessWidget {
                   style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 const SizedBox(height: 14),
-                Image(
-                  image: AssetImage(notes.photo_id),
+                Image.network(
+                  notes.photo_id,
                   height: 200,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Center(child: Text('Ошибка загрузки изображения'));
+                  },
                 ),
               ],
             ),

@@ -13,7 +13,7 @@ class CreateNotePage extends StatefulWidget {
 class _CreateNotePageState extends State<CreateNotePage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  String _imagePath = 'photo/new_note.gif';
+  final TextEditingController _imageUrlController = TextEditingController(); // Новый контроллер для URL изображения
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +34,9 @@ class _CreateNotePageState extends State<CreateNotePage> {
               decoration: const InputDecoration(labelText: 'Описание'),
               maxLines: 4,
             ),
-            // Здесь можно добавить виджет для выбора изображения
-            // Например, можно использовать ImagePicker для выбора изображения из галереи
-            ElevatedButton(
-              onPressed: () {
-                // Здесь можно добавить логику выбора изображения
-                // Например, открытие галереи
-              },
-              child: const Text('Выбрать изображение'),
+            TextField(
+              controller: _imageUrlController, // Используем новый контроллер
+              decoration: const InputDecoration(labelText: 'URL изображения'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -49,7 +44,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                 // Создаем новую заметку и возвращаемся на предыдущий экран
                 final newNote = Note(
                   id: DateTime.now().millisecondsSinceEpoch, // Уникальный ID
-                  photo_id: _imagePath,
+                  photo_id: _imageUrlController.text, // Используем URL изображения
                   title: _titleController.text,
                   description: _descriptionController.text,
                 );
