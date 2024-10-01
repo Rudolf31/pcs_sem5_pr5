@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pcs3_sem5/pages/home_page.dart';
 import 'package:pcs3_sem5/pages/profile_page.dart';
+import 'package:pcs3_sem5/pages/favorites-page.dart';
 
 class Screen extends StatefulWidget {
   const Screen({super.key});
@@ -14,7 +15,7 @@ class ScreenState extends State<Screen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    HomePage(),
+    FavoritesPage(),
     ProfilePage()
   ];
 

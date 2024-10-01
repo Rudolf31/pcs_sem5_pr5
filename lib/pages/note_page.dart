@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/note.dart';
+import 'package:pcs3_sem5/data/notes-list.dart';
 
 class NotePage extends StatefulWidget {
   final Note note;
@@ -8,21 +9,21 @@ class NotePage extends StatefulWidget {
   const NotePage({super.key, required this.note, required this.onDelete});
 
   @override
-  _NotePageState createState() => _NotePageState();
+  _NotePageState createState() => _NotePageState(mynote: note);
 }
 
 class _NotePageState extends State<NotePage> {
-  late bool isLiked;
+  final Note mynote;
+
+
+  _NotePageState({required this.mynote});
 
   @override
-  void initState() {
-    super.initState();
-    isLiked = widget.note.isLiked; // Инициализируем состояние isLiked
-  }
 
   void toggleLike() {
     setState(() {
-      isLiked = !isLiked; // Переключаем состояние isLiked
+      mynote.isLiked = !mynote.isLiked;
+      notes[widget.note.id - 1].isLiked = mynote.isLiked;
     });
   }
 
@@ -52,8 +53,8 @@ class _NotePageState extends State<NotePage> {
                 const SizedBox(width: 10),
                 IconButton(
                   icon: Icon(
-                    isLiked ? Icons.favorite : Icons.favorite_border,
-                    color: isLiked ? Colors.pink : Colors.grey,
+                    mynote.isLiked ? Icons.favorite : Icons.favorite_border,
+                    color: mynote.isLiked ? Colors.pink : Colors.grey,
                     size: 30,
                   ),
                   onPressed: toggleLike, // Обработчик нажатия

@@ -5,13 +5,13 @@ class Note {
   final String photo_id;
   final String title;
   final String description;
-  bool isLiked; // Уберите final, чтобы сделать поле изменяемым
+  bool isLiked;
 
   Note({
     required this.id,
     required this.photo_id,
     required this.title,
     required this.description,
-    this.isLiked = false, // Установите значение по умолчанию
+    this.isLiked = false,
   });
 }
