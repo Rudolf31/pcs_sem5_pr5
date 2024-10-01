@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
       id: 10,
       photo_id: 'https://media.tenor.com/PGnGqfkIuLYAAAAM/cat-head.gif',
       title: 'Грызя',
-      description: 'Грызя с рождения задается сложными для понимания вопросами. Однако над одним из них он по сей день ломает голову.. Так что же появилось раньше, курица или яйцо?',
+      description: 'Грызя с рождения задается сложными вопросами. Однако над одним из них он по сей день ломает голову.. Что же появилось раньше, курица или яйцо?',
     ),
   ];
 
@@ -101,14 +101,22 @@ class _HomePageState extends State<HomePage> {
       ),
       body: notes.isEmpty
           ? const Center(
-          child: Text('Мордашек не осталось', style: TextStyle(fontSize: 30),))
-          : ListView.builder(
+        child: Text(
+          'Мордашек не осталось',
+          style: TextStyle(fontSize: 30),
+        ),
+      )
+          : GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Количество столбцов
+          childAspectRatio: 0.5, // Соотношение сторон для элементов
+        ),
         itemCount: notes.length,
         itemBuilder: (BuildContext context, int index) {
           return Dismissible(
             key: Key(notes[index].id.toString()),
             background: Container(
-              color: Colors.red, // Красный фон
+              color: Colors.red,
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: const Text(
@@ -140,13 +148,12 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Открываем экран создания заметки
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => CreateNotePage(
                 onCreate: (Note newNote) {
-                  _addNote(newNote); // Передаем новую заметку в _addNote
+                  _addNote(newNote);
                 },
               ),
             ),
@@ -157,5 +164,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }

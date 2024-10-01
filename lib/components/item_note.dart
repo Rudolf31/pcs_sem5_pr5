@@ -6,19 +6,26 @@ class ItemNote extends StatelessWidget {
   const ItemNote({super.key, required this.notes, required this.onDelete});
 
   final Note notes;
-  final Function(int) onDelete; // Добавляем параметр для удаления заметки
+  final Function(int) onDelete;
 
   @override
   Widget build(BuildContext context) {
+    const int maxDescriptionLength = 100; // Максимальная длина описания
+
+    // Обрезаем текст описания, если он превышает максимальную длину
+    String trimmedDescription = notes.description;
+    if (trimmedDescription.length > maxDescriptionLength) {
+      trimmedDescription = trimmedDescription.substring(0, maxDescriptionLength) + '...';
+    }
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => NotePage(
               note: notes,
-              onDelete: onDelete, // Передаем функцию удаления
+              onDelete: onDelete,
             ),
           ),
         ),
@@ -40,12 +47,12 @@ class ItemNote extends StatelessWidget {
                 Center(
                   child: Text(
                     notes.title,
-                    style: const TextStyle(fontSize: 34, color: Colors.white),
+                    style: const TextStyle(fontSize: 26, color: Colors.white),
                   ),
                 ),
                 Text(
                   notes.description,
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 const SizedBox(height: 14),
                 Image.network(

@@ -3,7 +3,7 @@ import '../models/note.dart';
 
 class NotePage extends StatelessWidget {
   final Note note;
-  final Function(int) onDelete; // Добавляем параметр для удаления заметки
+  final Function(int) onDelete;
 
   const NotePage({super.key, required this.note, required this.onDelete});
 
@@ -46,7 +46,7 @@ class NotePage extends StatelessWidget {
                     padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
                   ),
                   onPressed: () {
-                    onDelete(note.id); // Вызываем функцию удаления
+                    onDelete(note.id);
                     Navigator.of(context).pop();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
