@@ -47,6 +47,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                   photo_id: _imageUrlController.text, // Используем URL изображения
                   title: _titleController.text,
                   description: _descriptionController.text,
+                    isLiked: false
                 );
                 widget.onCreate(newNote);
                 Navigator.pop(context);

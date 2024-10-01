@@ -10,13 +10,14 @@ class ItemNote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int maxDescriptionLength = 100; // Максимальная длина описания
+    const int maxDescriptionLength = 40; // Максимальная длина описания
 
     // Обрезаем текст описания, если он превышает максимальную длину
     String trimmedDescription = notes.description;
     if (trimmedDescription.length > maxDescriptionLength) {
       trimmedDescription = trimmedDescription.substring(0, maxDescriptionLength) + '...';
     }
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
@@ -51,7 +52,7 @@ class ItemNote extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  notes.description,
+                  trimmedDescription, // Используем обрезанное описание
                   style: const TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 const SizedBox(height: 14),

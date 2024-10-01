@@ -5,6 +5,7 @@ class Note {
   final String photo_id;
   final String title;
   final String description;
+  final bool isLiked;
 
-  Note({ required this.title, required this.description, required this.id, required this.photo_id});
+  Note({ required this.title, required this.description, required this.id, required this.photo_id, required this.isLiked});
 }

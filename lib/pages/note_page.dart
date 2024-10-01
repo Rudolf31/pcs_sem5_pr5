@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
 import '../models/note.dart';
 
-class NotePage extends StatelessWidget {
+class NotePage extends StatefulWidget {
   final Note note;
   final Function(int) onDelete;
 
   const NotePage({super.key, required this.note, required this.onDelete});
+
+  @override
+  _NotePageState createState() => _NotePageState();
+}
+
+class _NotePageState extends State<NotePage> {
+  late bool isLiked;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.note.isLiked; // Инициализируем состояние isLiked
+  }
+
+  void toggleLike() {
+    setState(() {
+      isLiked = !isLiked; // Переключаем состояние isLiked
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +42,35 @@ class NotePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              note.title,
-              style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.note.title,
+                    style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    isLiked ? Icons.favorite : Icons.favorite_border,
+                    color: isLiked ? Colors.pink : Colors.grey,
+                    size: 30,
+                  ),
+                  onPressed: toggleLike, // Обработчик нажатия
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             Text(
-              note.description,
+              widget.note.description,
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 20),
             Center(
-              child: Image.network(note.photo_id),
+              child: Image.network(widget.note.photo_id),
             ),
+            const SizedBox(height: 20),
             const SizedBox(height: 60),
             Center(
               child: SizedBox(
@@ -46,16 +81,22 @@ class NotePage extends StatelessWidget {
                     padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
                   ),
                   onPressed: () {
-                    onDelete(note.id);
+                    widget.onDelete(widget.note.id);
                     Navigator.of(context).pop();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Вы забрали мордашку!', style: TextStyle(fontSize: 24),),
+                        content: Text(
+                          'Вы забрали мордашку!',
+                          style: TextStyle(fontSize: 24),
+                        ),
                         backgroundColor: Colors.green,
                       ),
                     );
                   },
-                  child: Text('Забрать мордашку', style: TextStyle(fontSize: 30, color: Colors.green[100]),),
+                  child: Text(
+                    'Забрать мордашку',
+                    style: TextStyle(fontSize: 30, color: Colors.green[100]),
+                  ),
                 ),
               ),
             ),
