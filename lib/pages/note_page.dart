@@ -43,14 +43,13 @@ class _NotePageState extends State<NotePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    widget.note.title,
-                    style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
-                  ),
+                Text(
+                  widget.note.title,
+                  style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
                 ),
+                const SizedBox(width: 10),
                 IconButton(
                   icon: Icon(
                     isLiked ? Icons.favorite : Icons.favorite_border,
